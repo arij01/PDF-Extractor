@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 import pdfplumber
 import language_tool_python
 import os
-
+import io
 import uvicorn
 
 # Initializing FastAPI and language tool
@@ -14,12 +14,15 @@ UPLOAD_DIR = "C:/Users/21626/Downloads/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # Function to extract text from PDF
-def extract_text_from_pdf(file_path):
+def extract_text_from_pdf(file_bytes):
+    """Extract text from a PDF file using pdfplumber (in-memory)."""
     try:
-        with pdfplumber.open(file_path) as pdf:
-            text = ""
-            for page in pdf.pages:
-                text += page.extract_text()
+        # Wrap the bytes in a BytesIO object to mimic a file
+        with io.BytesIO(file_bytes) as pdf_file:
+            with pdfplumber.open(pdf_file) as pdf:
+                text = ""
+                for page in pdf.pages:
+                    text += page.extract_text() or ""  # Handle empty pages gracefully
         return text
     except Exception as e:
         return f"Error extracting text: {e}"
@@ -34,12 +37,13 @@ def correct_text(text):
 @app.post("/upload/")
 async def upload_pdf(file: UploadFile = File(...)):
     
-    file_path = f"{UPLOAD_DIR}/{file.filename}"
-    with open(file_path, "wb") as f:
-        f.write(await file.read())
+    # file_path = f"{UPLOAD_DIR}/{file.filename}"
+    # with open(file_path, "wb") as f:
+    #     f.write(await file.read())
+    content = await file.read()
 
    
-    extracted_text = extract_text_from_pdf(file_path)
+    extracted_text = extract_text_from_pdf(content)
 
     
     corrected_text = correct_text(extracted_text)
