@@ -3,6 +3,7 @@ import pdfplumber
 import language_tool_python
 import io
 import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 
 # Initializing FastAPI and language tool
 app = FastAPI()
@@ -25,6 +26,15 @@ def correct_text(text):
     matches = tool.check(text)
     corrected_text = language_tool_python.utils.correct(text, matches)
     return corrected_text
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"], 
+    allow_credentials=True,
+    allow_methods=["*"], 
+    allow_headers=["*"],  
+)
 
 # Upload Endpoint
 @app.post("/upload/")
