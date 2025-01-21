@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader"; // Import spinner
 
 function App() {
   const [file, setFile] = useState(null);
   const [correctedText, setCorrectedText] = useState("");
+  const [loading, setLoading] = useState(false); // Track loading state
 
   // Handle file selection
   const handleFileChange = (event) => {
@@ -18,6 +20,7 @@ function App() {
       return;
     }
 
+    setLoading(true); // Start loading
     const formData = new FormData();
     formData.append("file", file);
 
@@ -32,10 +35,12 @@ function App() {
       }
 
       const data = await response.json();
-      setCorrectedText(data.corrected_text);
+      setCorrectedText(data.corrected_text); // Set the corrected text
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while uploading the file.");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -54,10 +59,21 @@ function App() {
           />
         </label>
         <br />
-        <button type="submit" style={{ padding: "10px 20px", cursor: "pointer" }}>
+        <button
+          type="submit"
+          style={{ padding: "10px 20px", cursor: "pointer" }}
+          disabled={loading} // Disable button when loading
+        >
           Submit
         </button>
       </form>
+
+      {loading && (
+        <div style={{ marginBottom: "20px", display: "flex", alignItems: "center" }}>
+          <ClipLoader color="blue" loading={loading} size={50} />
+          <span style={{ marginLeft: "10px", color: "blue" }}>Processing your PDF... Please wait.</span>
+        </div>
+      )}
 
       {correctedText && (
         <div>
