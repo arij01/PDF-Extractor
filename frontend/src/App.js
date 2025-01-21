@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import ClipLoader from "react-spinners/ClipLoader"; // Import spinner
+import ClipLoader from "react-spinners/ClipLoader";
+import "./App.css";
 
 function App() {
   const [file, setFile] = useState(null);
