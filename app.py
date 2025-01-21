@@ -1,7 +1,6 @@
 from fastapi import FastAPI, File, UploadFile
 import pdfplumber
 import language_tool_python
-import os
 import io
 import uvicorn
 
@@ -9,20 +8,14 @@ import uvicorn
 app = FastAPI()
 tool = language_tool_python.LanguageTool('en-US')
 
-# Directory for uploaded files
-UPLOAD_DIR = "C:/Users/21626/Downloads/uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
-
 # Function to extract text from PDF
 def extract_text_from_pdf(file_bytes):
-    """Extract text from a PDF file using pdfplumber (in-memory)."""
     try:
-        # Wrap the bytes in a BytesIO object to mimic a file
         with io.BytesIO(file_bytes) as pdf_file:
             with pdfplumber.open(pdf_file) as pdf:
                 text = ""
                 for page in pdf.pages:
-                    text += page.extract_text() or ""  # Handle empty pages gracefully
+                    text += page.extract_text() or ""  
         return text
     except Exception as e:
         return f"Error extracting text: {e}"
@@ -49,7 +42,7 @@ async def upload_pdf(file: UploadFile = File(...)):
     corrected_text = correct_text(extracted_text)
 
     return {
-        "extracted_text": extracted_text,
+        # "extracted_text": extracted_text,
         "corrected_text": corrected_text
     }
 
