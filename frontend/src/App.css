@@ -1,0 +1,123 @@
+/* General container styling */
+.container {
+  font-family: Arial, sans-serif;
+  max-width: 90%; /* Use relative width */
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem; /* Space around the container */
+}
+
+/* Drag-and-drop upload box */
+.upload-box {
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 2rem; /* Consistent padding */
+  margin: 1.5rem 0;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content */
+  justify-content: center; /* Center vertically */
+  min-height: 200px; /* Minimum height for responsiveness */
+}
+
+/* Icon in the upload box */
+.upload-box img {
+  max-width: 20%; /* Responsive width for icon */
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+/* Text inside upload box */
+.upload-box p {
+  margin: 0.5rem 0;
+  font-size: 1rem; /* Relative font size for responsiveness */
+  color: #666;
+}
+
+/* Button in the upload box */
+.upload-btn {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.upload-btn:hover {
+  background-color: #ff6b6c;
+}
+
+/* File details section */
+.file-details {
+  margin: 1.5rem 0;
+  font-size: 1rem; /* Adjust text size */
+}
+
+/* Results section */
+.results {
+  margin: 2rem 0;
+  text-align: left; /* Align text for readability */
+  padding: 1rem;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+}
+
+.results h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.results p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Small text below upload box */
+small {
+  font-size: 0.9rem; /* Slightly smaller text */
+  color: #999;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .upload-box {
+    padding: 1.5rem; /* Reduce padding on smaller screens */
+  }
+
+  .upload-box img {
+    max-width: 30%; /* Slightly larger icon for smaller screens */
+  }
+
+  .upload-btn {
+    width: 100%; /* Full-width button on small screens */
+    padding: 0.75rem;
+  }
+
+  .container {
+    padding: 1rem; /* Reduce padding on smaller screens */
+  }
+
+  .results {
+    font-size: 0.95rem; /* Adjust text size for small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-box img {
+    max-width: 40%; /* Larger icon for very small screens */
+  }
+
+  .upload-btn {
+    font-size: 0.9rem; /* Slightly smaller button text */
+  }
+
+  .results {
+    font-size: 0.85rem; /* Adjust text size for very small screens */
+  }
+}
