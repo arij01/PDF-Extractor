@@ -7,16 +7,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   color: #333;
 }
 
 /* Centered container */
 .container {
-  max-width: 600px;
-  width: 90%;
+  max-width: 90%;
+  width: 100%;
   background-color: #ffffff;
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -24,152 +24,132 @@ body {
 }
 
 .container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-0.5rem);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Title styling */
+/* Headline */
 h1 {
-  color: #333;
   margin-bottom: 1.5rem;
-  font-size: 2.5rem;
-  font-weight: 700;
-  position: relative;
+  font-size: 2rem;
 }
 
-h1::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: #ff7e5f;
-  margin: 0.5rem auto 0;
-  border-radius: 5px;
-}
-
-/* Form styling */
-form {
+/* Form styles */
+.form {
   margin-bottom: 2rem;
 }
 
-label {
-  font-weight: 500;
+.dropzone {
+  border: 0.125rem dashed #007bff;
+  padding: 1.25rem;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.file-name {
+  margin-top: 1rem;
   font-size: 1rem;
-  color: #555;
-  display: block;
-  margin-bottom: 0.5rem;
-  text-align: left;
+  color: #007bff;
 }
 
-input[type="file"] {
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  width: 100%;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  transition: border-color 0.3s ease;
-}
-
-input[type="file"]:focus {
-  border-color: #ff5722;
-  outline: none;
-}
-
-button {
-  background: linear-gradient(135deg, #ffa951, #ff7e5f);
+.submit-button {
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 0.5rem;
-  padding: 0.75rem 2rem;
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(255, 125, 94, 0.3);
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background: linear-gradient(135deg, #ff8e47, #ff6c4a);
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(255, 110, 80, 0.4);
+.submit-button:hover {
+  background-color: #0056b3;
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  box-shadow: none;
+.loading {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
 }
 
-/* Corrected Text Display */
-textarea {
-  width: 100%;
-  background: #f9fafb;
-  border: 1px solid #ddd;
-  border-radius: 0.75rem;
-  padding: 1rem;
-  font-size: 1rem;
-  line-height: 1.6;
-  resize: none;
-  margin-top: 1.5rem;
-  transition: border-color 0.3s ease;
-  color: #333;
+.loading span {
+  margin-left: 0.625rem;
+  color: blue;
 }
 
-textarea:focus {
-  border-color: #ff5722;
-  outline: none;
-}
-
-/* Subtitle styling */
-h2 {
-  color: #555;
+.result {
   margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  font-weight: 500;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
+.result-textarea {
+  width: 100%;
+  padding: 0.625rem;
+  border: 0.125rem solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
 
+/* Responsive styles */
+@media (max-width: 768px) {
   .container {
     padding: 1.5rem;
   }
 
-  input[type="file"] {
-    padding: 0.5rem;
+  h1 {
+    font-size: 1.75rem;
   }
 
-  button {
+  .form {
+    margin-bottom: 1.5rem;
+  }
+
+  .dropzone {
+    padding: 1rem;
+  }
+
+  .submit-button {
     padding: 0.5rem 1rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
-  textarea {
+  .loading span {
+    font-size: 0.9rem;
+  }
+
+  .result-textarea {
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
   .container {
     padding: 1rem;
   }
 
-  input[type="file"],
-  button,
-  textarea {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .form {
+    margin-bottom: 1rem;
+  }
+
+  .dropzone {
+    padding: 0.75rem;
+  }
+
+  .submit-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .loading span {
+    font-size: 0.8rem;
+  }
+
+  .result-textarea {
     font-size: 0.8rem;
   }
 }

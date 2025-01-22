@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDropzone } from "react-dropzone";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./App.css";
 
@@ -8,8 +9,8 @@ function App() {
   const [loading, setLoading] = useState(false); // Track loading state
 
   // Handle file selection
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+  const handleFileChange = (acceptedFiles) => {
+    setFile(acceptedFiles[0]);
   };
 
   // Handle form submission
@@ -45,47 +46,37 @@ function App() {
     }
   };
 
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: ".pdf",
+    onDrop: handleFileChange,
+  });
+
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <div className="container">
       <h1>PDF Text Correction</h1>
 
-      <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
-        <label>
-          Upload your PDF:
-          <input
-            type="file"
-            accept=".pdf"
-            onChange={handleFileChange}
-            style={{ margin: "10px 0" }}
-          />
-        </label>
-        <br />
-        <button
-          type="submit"
-          style={{ padding: "10px 20px", cursor: "pointer" }}
-          disabled={loading} // Disable button when loading
-        >
+      <form onSubmit={handleSubmit} className="form">
+        <div {...getRootProps()} className="dropzone">
+          <input {...getInputProps()} />
+          <p>Drag & drop a PDF file here, or click to select one</p>
+        </div>
+        {file && <p className="file-name">Selected file: {file.name}</p>}
+        <button type="submit" className="submit-button" disabled={loading}>
           Submit
         </button>
       </form>
 
       {loading && (
-        <div style={{ marginBottom: "20px", display: "flex", alignItems: "center" }}>
+        <div className="loading">
           <ClipLoader color="blue" loading={loading} size={50} />
-          <span style={{ marginLeft: "10px", color: "blue" }}>Processing your PDF... Please wait.</span>
+          <span>Processing your PDF... Please wait.</span>
         </div>
       )}
 
       {correctedText && (
-        <div>
+        <div className="result">
           <h2>Corrected Text:</h2>
-          <textarea
-            value={correctedText}
-            readOnly
-            rows="10"
-            cols="50"
-            style={{ width: "100%", padding: "10px" }}
-          />
+          <textarea value={correctedText} readOnly rows="10" className="result-textarea" />
         </div>
       )}
     </div>
