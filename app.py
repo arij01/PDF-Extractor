@@ -4,10 +4,21 @@ import language_tool_python
 import io
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
+from langdetect import detect
 
 # Initializing FastAPI and language tool
 app = FastAPI()
-tool = language_tool_python.LanguageTool('en-US')
+tool_en = language_tool_python.LanguageTool('en-US')
+tool_fr = language_tool_python.LanguageTool('fr')
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"], 
+    allow_credentials=True,
+    allow_methods=["*"], 
+    allow_headers=["*"],  
+)
 
 # Function to extract text from PDF
 def extract_text_from_pdf(file_bytes):
@@ -23,26 +34,22 @@ def extract_text_from_pdf(file_bytes):
 
 # Function to correct spelling/grammars
 def correct_text(text):
-    matches = tool.check(text)
-    corrected_text = language_tool_python.utils.correct(text, matches)
-    return corrected_text
+    try:
+        language = detect(text)
+        if language == 'fr':
+            corrected_text = tool_fr.correct(text)
+        else:
+            corrected_text = tool_en.correct(text)
+        return corrected_text
+    except Exception as e:
+        print(f"Error correcting text: {e}")
+        return text
 
-# CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"], 
-    allow_credentials=True,
-    allow_methods=["*"], 
-    allow_headers=["*"],  
-)
 
 # Upload Endpoint
 @app.post("/upload/")
 async def upload_pdf(file: UploadFile = File(...)):
     
-    # file_path = f"{UPLOAD_DIR}/{file.filename}"
-    # with open(file_path, "wb") as f:
-    #     f.write(await file.read())
     content = await file.read()
 
    
