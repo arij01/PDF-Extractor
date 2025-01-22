@@ -21,7 +21,7 @@ PDF-Extractor is a web application that allows users to upload PDF files, extrac
 1. Clone the repository:
 
 ```sh
-git https://github.com/arij01/PDF-Extractor.git
+git clone https://github.com/arij01/PDF-Extractor.git
 cd PDF-Extractor
 ```
 2. Install requirements:
@@ -46,7 +46,7 @@ npm start
 
 ## Usage
 
-A sample PDF file is provided in the `samples` directory. You can use this file to test the application.
+A sample PDF file is provided in the `sample` directory. You can use this file to test the application.
 
 ### Uploading a PDF
 
