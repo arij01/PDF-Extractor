@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>PDF Text Correction</h1>
+      <h1>PDF Extractor</h1>
 
       <form onSubmit={handleSubmit} className="form">
         <div {...getRootProps()} className="dropzone">
@@ -75,7 +75,7 @@ function App() {
 
       {correctedText && (
         <div className="result">
-          <h2>Corrected Text:</h2>
+          <h2>Extracted and Corrected Text</h2>
           <textarea value={correctedText} readOnly rows="10" className="result-textarea" />
         </div>
       )}
