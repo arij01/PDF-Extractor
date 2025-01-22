@@ -3,7 +3,7 @@
 
 ## About
 
-PDF-Extractor is a web application that allows users to upload PDF files, extract text from them, and correct the text using language tools. The frontend is built with React, and the backend is built with FastAPI.
+PDF-Extractor is a web application that allows users to upload PDF files, extract text from them, and correct the text using language tools. The frontend is built with React, and the backend is built with FastAPI. This application supports both English and French languages.
 
 ## Getting Started
 
@@ -63,4 +63,4 @@ A sample PDF file is provided in the `sample` directory. You can use this file t
 
 ### Correcting Text
 
-The application uses `language_tool_python` to correct the text extracted from the PDF. It supports both English and French languages. The language is automatically detected using `langdetect`.
+The application uses `language_tool_python` to correct the text extracted from the PDF. The language is automatically detected using `langdetect`.
