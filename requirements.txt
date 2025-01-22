@@ -1,0 +1,5 @@
+fastapi
+pdfplumber
+language_tool_python
+uvicorn
+langdetect
