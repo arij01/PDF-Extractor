@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
   const [file, setFile] = useState(null);
   const [correctedText, setCorrectedText] = useState("");
-  const [loading, setLoading] = useState(false); // Track loading state
+  const [loading, setLoading] = useState(false);
 
   // Handle file selection
   const handleFileChange = (acceptedFiles) => {
@@ -22,7 +22,7 @@ function App() {
       return;
     }
 
-    setLoading(true); // Start loading
+    setLoading(true); 
     const formData = new FormData();
     formData.append("file", file);
 
@@ -37,12 +37,12 @@ function App() {
       }
 
       const data = await response.json();
-      setCorrectedText(data.corrected_text); // Set the corrected text
+      setCorrectedText(data.corrected_text); 
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while uploading the file.");
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false); 
     }
   };
 
